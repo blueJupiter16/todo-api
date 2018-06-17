@@ -1,10 +1,10 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 
-var {mongoose} = require('./db/mongoose.js');
-var {Todo} = require('./models/todo');
-var {User} = require('./models/user');
-var {log} = require('../helper/logger.js');
+const {mongoose} = require('./db/mongoose.js');
+const {Todo} = require('./models/todo');
+const {User} = require('./models/user');
+const {log} = require('../helper/logger.js');
 
 var app = express();
 
@@ -26,6 +26,16 @@ app.get('/todos', (req,res) => {
     Todo.find().then((todos) => {
         res.send(todos);
     }).catch((err) =>{ 
+        res.status(400).send(err);
+    });
+});
+
+app.get('/todos/:id', (req,res) => {
+    Todo.findById(req.params.id).then((doc) => {
+        if(!doc)
+            return res.status(404).send();
+        res.send(doc);
+    }).catch((err) => {
         res.status(400).send(err);
     });
 });
