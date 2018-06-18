@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-var uri = 'mongodb+srv://<tinwalajunaid@gmail.com>:<Lenovo1996!>@cluster0-t2gwr.mongodb.net/test?retryWrites=true';
-mongoose.connect(`${uri}/TodoApp`);
+var uri = 'mongodb+srv://tinwalajunaid@gmail.com:Lenovo1996!@cluster0-t2gwr.mongodb.net/test?retryWrites=true';
+//m0ongoose.connect(`${uri}/TodoApp`);
+mongoose.connect(`mongodb://localhost/TodoApp`);
 
 module.exports = {
     mongoose
