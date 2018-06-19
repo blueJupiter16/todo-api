@@ -24,6 +24,28 @@ app.post('/todos', (req,res) => {
     });
 });
 
+app.delete('todos/:id', (req,res) => {
+    var id = req.params.id;
+    if(ObjectID.isValid(id)){
+        Todo.findByIdAndRemove(id).then((doc) => {
+
+            if(!doc) {
+                res.status(404).send();
+            }
+            else{
+                res.send(doc);
+            }
+            
+        }).catch((err) => {
+            log(err);
+        });
+    }
+    else{
+        res.status(404).send('Not a valid ID');
+    }
+    
+});
+
 app.get('/todos', (req,res) => {
     Todo.find().then((todos) => {
         res.send(todos);
