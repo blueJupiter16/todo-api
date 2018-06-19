@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 
 app.post('/todos', (req,res) => {
     var todo = new Todo({
-        text:req.body.text
+        text:req.body.text,
+        completed:req.body.completed        
     });
     todo.save().then((doc) => {
         res.send(doc);
