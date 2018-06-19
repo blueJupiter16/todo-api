@@ -5,7 +5,9 @@ var uri = 'mongodb://user1:password_user1@cluster0-shard-00-00-t2gwr.mongodb.net
 //var uri = 'mongodb+srv://user1:password_user1@cluster0-t2gwr.mongodb.net/TodoApp?retryWrites=true';
 var res = encodeURIComponent(uri);
 
-mongoose.connect(`${res}`);
+mongoose.connect(`${res}`, (err) => {
+    console.log(err);
+});
 //mongoose.connect(`mongodb://localhost/TodoApp`);
 
 module.exports = {
