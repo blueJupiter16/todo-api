@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const _ = require('lodash');
 const {ObjectID} = require('mongodb');
 
-const {mongoose} = require('./db/mongoose.js');
-const {Todo} = require('./models/todo');
-const {User} = require('./models/user');
-const {log} = require('../helper/logger.js');
+var {mongoose} = require('./db/mongoose.js');
+var {Todo} = require('./models/todo');
+var {User} = require('./models/user');
+var {log} = require('../helper/logger.js');
+var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
 const port = process.env.PORT || 3000;
@@ -103,6 +104,13 @@ app.post('/users', (req,res) => {
         res.status(400).send(err);
     });
 });
+
+
+//private route
+app.get('/users/me',authenticate, (req,res) => {
+    res.send(req.user);
+});
+
 
 app.listen(port, () => {
     log(`Started on port ${port}`);
