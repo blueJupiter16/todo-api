@@ -105,11 +105,30 @@ app.post('/users', (req,res) => {
     });
 });
 
-
 //private route
 app.get('/users/me',authenticate, (req,res) => {
     res.send(req.user);
 });
+
+//dev-routes
+app.get('/users', (req,res) => {
+    User.find().then((users) => {
+        res.send(users);
+    }).catch((err) =>{ 
+        res.status(400).send(err);
+    });
+});
+
+app.delete('/drop-all', (req,res) => {
+    
+    Todo.remove({},(err) => {
+        
+    });
+    User.remove({},(err) => {
+        
+    });
+});
+
 
 
 app.listen(port, () => {
