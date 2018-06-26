@@ -1,3 +1,5 @@
+require('./config/config');
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
@@ -10,8 +12,7 @@ var {log} = require('../helper/logger.js');
 var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
-const port = process.env.PORT || 3000;
-log(JSON.stringify(process.env));
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 

@@ -1,0 +1,8 @@
+{
+    "development":{
+        "PORT":3000,
+        "MONGODB_URI":"mongodb://user1:cNbB60QSPGVkttH9@cluster0-shard-00-00-t2gwr.mongodb.net:27017,cluster0-shard-00-01-t2gwr.mongodb.net:27017,cluster0-shard-00-02-t2gwr.mongodb.net:27017/TodoApp?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin",
+        "JWT_SECRET_KEY":"slfsg5sdn9p38lenriuh758oof9fowukljsjq209"
+
+    }
+}
