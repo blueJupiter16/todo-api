@@ -17,6 +17,16 @@ const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
+//CORS
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
 //todo API
 app.get('/todos', authenticate, (req, res) => {
   Todo.find({ _creator: req.user._id })
