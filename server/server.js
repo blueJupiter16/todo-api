@@ -21,6 +21,7 @@ app.use(cors());
 
 //CORS
 var corsOptions = {
+  allowedHeaders: ['Content-Range', 'Date', 'X-Auth'],
   exposedHeaders: ['Content-Range', 'Date', 'X-Auth']
 };
 app.options('*', cors(corsOptions)); // include before other routes
