@@ -20,7 +20,10 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //CORS
-app.options('*', cors()); // include before other routes
+var corsOptions = {
+  exposedHeaders: ['Content-Range', 'Date', 'X-Auth']
+};
+app.options('*', cors(corsOptions)); // include before other routes
 
 //todo API
 app.get('/todos', authenticate, (req, res) => {
