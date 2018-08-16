@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 const { ObjectID } = require('mongodb');
+const cors = require('cors');
 
 var { mongoose } = require('./db/mongoose.js');
 var { Todo } = require('./models/todo');
@@ -18,14 +19,7 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 
 //CORS
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept, Date, X-Auth'
-  );
-  next();
-});
+app.options('*', cors()); // include before other routes
 
 //todo API
 app.get('/todos', authenticate, (req, res) => {
@@ -126,7 +120,7 @@ app.patch('/todos/:id', authenticate, (req, res) => {
 });
 
 //user API
-app.post('/users', setHeaders, (req, res) => {
+app.post('/users', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
 
@@ -148,7 +142,7 @@ app.post('/users', setHeaders, (req, res) => {
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
 });
-app.post('/users/login', setHeaders, (req, res) => {
+app.post('/users/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   User.findByCredentials(body.email, body.password)
     .then(user => {
