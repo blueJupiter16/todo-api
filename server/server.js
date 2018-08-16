@@ -17,6 +17,7 @@ var app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 //CORS
 app.options('*', cors()); // include before other routes
