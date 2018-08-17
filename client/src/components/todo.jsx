@@ -22,7 +22,7 @@ class Todo extends Component {
       }
     };
 
-    const request = new Request('/todos/' + this.props.todo._id, options);
+    const request = new Request('/api/todos/' + this.props.todo._id, options);
     console.log(request);
     fetch(request)
       .then(resp => {

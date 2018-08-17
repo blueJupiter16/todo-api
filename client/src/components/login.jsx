@@ -29,7 +29,7 @@ export default class Login extends Component {
               e,
               this.state.email,
               this.state.password,
-              '/users/login'
+              '/api/users/login'
             )
           }
         >

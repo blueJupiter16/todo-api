@@ -24,7 +24,12 @@ class SignUp extends Component {
 
   checkPasswords(e) {
     if (this.state.password === this.state.repassword) {
-      this.props.onSubmit(e, this.state.email, this.state.password, '/users');
+      this.props.onSubmit(
+        e,
+        this.state.email,
+        this.state.password,
+        '/api/users'
+      );
     } else {
       alert('Passwords DO Not match');
     }

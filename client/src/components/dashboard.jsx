@@ -22,7 +22,7 @@ class Dashboard extends Component {
       method: 'GET',
       headers
     };
-    const request = new Request('/todos', options);
+    const request = new Request('/api/todos', options);
 
     fetch(request)
       .then(resp => {
@@ -54,7 +54,7 @@ class Dashboard extends Component {
       method: 'DELETE',
       headers
     };
-    const request = new Request('/todos/' + id, options);
+    const request = new Request('/api/todos/' + id, options);
 
     fetch(request)
       .then(resp => {
@@ -92,7 +92,7 @@ class Dashboard extends Component {
         text: text
       })
     };
-    const request = new Request('/todos', options);
+    const request = new Request('/api/todos', options);
 
     fetch(request)
       .then(resp => {

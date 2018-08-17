@@ -27,7 +27,7 @@ var corsOptions = {
 app.options('*', cors(corsOptions)); // include before other routes
 
 //todo API
-app.get('/todos', authenticate, (req, res) => {
+app.get('/api/todos', authenticate, (req, res) => {
   Todo.find({ _creator: req.user._id })
     .then(todos => {
       res.send(todos);
@@ -37,7 +37,7 @@ app.get('/todos', authenticate, (req, res) => {
     });
 });
 
-app.get('/todos/:id', authenticate, (req, res) => {
+app.get('/api/todos/:id', authenticate, (req, res) => {
   Todo.findOne({
     _id: req.params.id,
     _creator: req.user._id
@@ -51,7 +51,7 @@ app.get('/todos/:id', authenticate, (req, res) => {
     });
 });
 
-app.post('/todos', authenticate, (req, res) => {
+app.post('/api/todos', authenticate, (req, res) => {
   var todo = new Todo({
     text: req.body.text,
     _creator: req.user._id
@@ -67,7 +67,7 @@ app.post('/todos', authenticate, (req, res) => {
     });
 });
 
-app.delete('/todos/:id', authenticate, (req, res) => {
+app.delete('/api/todos/:id', authenticate, (req, res) => {
   var id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
@@ -90,7 +90,7 @@ app.delete('/todos/:id', authenticate, (req, res) => {
     });
 });
 
-app.patch('/todos/:id', authenticate, (req, res) => {
+app.patch('/api/todos/:id', authenticate, (req, res) => {
   var id = req.params.id;
   var body = _.pick(req.body, ['text', 'completed']);
 
@@ -125,7 +125,7 @@ app.patch('/todos/:id', authenticate, (req, res) => {
 });
 
 //user API
-app.post('/users', (req, res) => {
+app.post('/api/users', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   var user = new User(body);
 
@@ -144,7 +144,7 @@ app.post('/users', (req, res) => {
 });
 
 //private route - to authenticate API request
-app.get('/users/me', authenticate, (req, res) => {
+app.get('/api/users/me', authenticate, (req, res) => {
   res.send(req.user);
 });
 app.post('/users/login', (req, res) => {
@@ -160,7 +160,7 @@ app.post('/users/login', (req, res) => {
     });
 });
 
-app.delete('/users/me/token', authenticate, (req, res) => {
+app.delete('/api/users/me/token', authenticate, (req, res) => {
   req.user
     .removeToken(req.token)
     .then(() => {
@@ -181,7 +181,7 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.delete('/drop-all', (req, res) => {
+app.delete('/api/drop-all', (req, res) => {
   Todo.remove({}, err => {});
   User.remove({}, err => {});
   res.status(200).send();
