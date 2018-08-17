@@ -9,7 +9,7 @@ const cors = require('cors');
 var { mongoose } = require('./db/mongoose.js');
 var { Todo } = require('./models/todo');
 var { User } = require('./models/user');
-var { log } = require('../helper/logger.js');
+var { log } = require('./helper/logger.js');
 var { authenticate } = require('./middleware/authenticate');
 var { setHeaders } = require('./middleware/setHeaders');
 
