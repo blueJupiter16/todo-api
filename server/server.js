@@ -147,6 +147,7 @@ app.post('/api/users', (req, res) => {
 app.get('/api/users/me', authenticate, (req, res) => {
   res.send(req.user);
 });
+
 app.post('/api/users/login', (req, res) => {
   var body = _.pick(req.body, ['email', 'password']);
   User.findByCredentials(body.email, body.password)
