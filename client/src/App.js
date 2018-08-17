@@ -28,18 +28,19 @@ class App extends Component {
       })
     };
     const request = new Request(route, options);
-    console.log(options);
+
     fetch(request)
       .then(resp => {
         if (resp.status === 400) {
           return Promise.reject('Bad Request');
         } else {
           token = resp.headers.get('X-Auth');
+          console.log(resp);
           return Promise.resolve(resp.json());
         }
       })
       .then(body => {
-        //console.log(body.email);
+        console.log(body.email);
         this.setState({ screen: 'dashboard', xauth: token, email: body.email });
         console.log(this.state);
       })
