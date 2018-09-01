@@ -25,8 +25,10 @@ class CreateTodo extends Component {
           <br />
           <button
             onClick={() => {
-              this.props.onSave(this.state.text);
+              var text = this.state.text;
               this.setState({ text: '' });
+              //console.log(this.state);
+              this.props.onSave(text);
             }}
             type="button"
             className="btn btn-primary"

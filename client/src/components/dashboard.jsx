@@ -38,10 +38,10 @@ class Dashboard extends Component {
           return body[i];
         });
         this.setState({ todos: bd });
-        console.log(this.state);
+        //console.log(this.state);
       })
       .catch(err => {
-        console.log(err);
+        //console.log(err);
       });
   }
 
@@ -55,7 +55,7 @@ class Dashboard extends Component {
       headers
     };
     const request = new Request('/api/todos/' + id, options);
-
+    //console.log('Delete-',request);
     fetch(request)
       .then(resp => {
         if (resp.status === 400) {
@@ -75,12 +75,11 @@ class Dashboard extends Component {
         //console.log(this.state);
       })
       .catch(err => {
-        console.log(err);
+        //console.log(err);
       });
   };
 
   saveTodo = text => {
-    console.log('Inside Save Todo: ', text);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('x-auth', this.props.xauthToken);
@@ -93,7 +92,7 @@ class Dashboard extends Component {
       })
     };
     const request = new Request('/api/todos', options);
-
+    //console.log('Create',request);
     fetch(request)
       .then(resp => {
         if (resp.status === 400) {
@@ -103,7 +102,7 @@ class Dashboard extends Component {
         }
       })
       .then(body => {
-        console.log('body ', body);
+        //console.log('body ', body);
         var bd = [];
         bd = _.concat(this.state.todos, body);
         this.setState({ todos: bd });

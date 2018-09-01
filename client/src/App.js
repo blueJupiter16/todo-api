@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   handleSubmit = (event, email, password, route) => {
-    console.log('handleSubmit');
+    //console.log('handleSubmit');
     var token = '';
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -35,17 +35,17 @@ class App extends Component {
           return Promise.reject('Bad Request');
         } else {
           token = resp.headers.get('X-Auth');
-          console.log(resp);
+          //console.log(resp);
           return Promise.resolve(resp.json());
         }
       })
       .then(body => {
-        console.log(body.email);
+        //console.log(body.email);
         this.setState({ screen: 'dashboard', xauth: token, email: body.email });
-        console.log(this.state);
+        //console.log(this.state);
       })
       .catch(err => {
-        console.log(err);
+        //console.log(err);
         alert(err);
       });
 

@@ -18,13 +18,13 @@ class Todo extends Component {
     const options = {
       method: 'PATCH',
       headers,
-      body: {
-        completed: true
-      }
+      body: JSON.stringify({
+        'completed': true
+      })
     };
 
     const request = new Request('/api/todos/' + this.props.todo._id, options);
-    console.log(request);
+    //console.log('PatchRequest-',request);
     fetch(request)
       .then(resp => {
         if (Math.floor(resp.status / 100) === 4) {
@@ -37,7 +37,7 @@ class Todo extends Component {
         this.setState({ completed: true });
       })
       .catch(err => {
-        console.log(err);
+       // console.log('Patch: ',err);
       });
   };
 
